@@ -26,7 +26,7 @@ int main() {//main é a função principal tudo dentro das {} é um bloco de có
 
 //Variáveis sempre minusculas camel case, numca começar por um número
 int quntLivros = 5;//int=inteiro
-int x, y, z;
+int x;
 x = 25;
 cout << quntLivros * 2 << endl;
 cout << quntLivros + 5 << endl;
@@ -54,7 +54,17 @@ string sobrenome;
 sobrenome = "Santos";
 
     cout << " Nome " << nome << " " << sobrenome << endl;
-    
+
+//2 * pi * r
+const double pi = 3.1416;//const=constates é um valor que é não pode variar e nem ser alterado no codigo
+const int y = 2;
+
+float valor;
+
+cout << "idique o valor do raio";
+cin >> valor;
+cout << y * pi * 5 << endl;
+
 return 0;
 
 
