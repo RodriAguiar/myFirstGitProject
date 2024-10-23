@@ -106,5 +106,10 @@ if (y == 2 ) {
 //if comparar valores
 //else if vai ser chamada se a anterior for chamada
 //switch é para selecionar um dos blocos de comando
+
+
+
+
+
 return 0;
 }
