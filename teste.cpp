@@ -106,8 +106,14 @@ if (y == 2 ) {
 //if comparar valores
 //else if vai ser chamada se a anterior for chamada
 //switch é para selecionar um dos blocos de comando
-//
-
+//while loop
+// do while executa pelo menos uma vez oque está no bloco de comando
+//loop for nessesário três parametros
+//brake para qualquer ciclo seja while loop do while
+//continue continua para o começo do loop
+//array espécie de armário para guaradar informações int variável[número de "gavetas"] ou string nomeDosAlunos[] = {"João" , "Maria" , "Jose"};
+//struct criar um novo tipo de variavel
+//enums 
 
 
 
