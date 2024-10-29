@@ -1,25 +1,13 @@
 #include <iostream>
-using namespace std;
 
-int main() {
-    // Criação de um array para armazenar os números pares
-    int array[10]; // Existem 10 números pares de 1 a 20
-    int index = 0;
+ using namespace std;
 
-    // Preenchendo o array com números pares de 1 a 20
-    for (int i = 1; i <= 20; i++) {
-        if (i % 2 == 0) { // Verifica se o número é par
-            array[index] = i;
-            index++;
-        }
-    }
+int main () {
 
-    // Exibindo os números pares armazenados no array
-    cout << "Números pares de 1 a 20:" << endl;
-    for (int i = 0; i < index; i++) {
-        cout << array[i] << " ";
-    }
-    cout << endl;
+int numerospares [20] = { 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10 , 11 , 12 , 13 , 14 , 15 , 16 , 17 , 18 , 19 , 20 };
+for (int x=0 ; x < 20; x++){
+    if (numerospares [x] %2 == 0)
+    cout << numerospares [x] << endl;
 
-    return 0;
+}
 }
