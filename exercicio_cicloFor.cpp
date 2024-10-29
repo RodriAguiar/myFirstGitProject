@@ -10,4 +10,5 @@ for (int x=0 ; x < 20; x++){
     cout << numerospares [x] << endl;
 
 }
+return 0;
 }
