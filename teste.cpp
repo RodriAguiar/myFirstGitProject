@@ -115,6 +115,11 @@ if (y == 2 ) {
 //struct criar um novo tipo de variavel
 //enums 
 
+/*
+Array de Inteiros com 20 elementos 
+ciclo for para mostrar apenas elementos pares
+*/
+
 
 
 return 0;
