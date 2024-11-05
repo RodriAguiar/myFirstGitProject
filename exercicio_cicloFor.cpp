@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream> //permite que nós utilizamos o cout e cin
 
  using namespace std;
 
