@@ -74,7 +74,7 @@ cout << Y * PI * 5 << endl;
 // <=    Menor ou igual
 // &&    e
 // ||    OU
-
+// x+=y  x é igual a x+y  
 
 
 int abc; 

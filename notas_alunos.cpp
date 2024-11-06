@@ -13,5 +13,5 @@ cin >> z;
  cout << "aqui está a média: ";
  cout << (x + y + z)  / 3 << endl;
  
-
+return 0;
 }
