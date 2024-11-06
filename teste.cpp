@@ -57,13 +57,13 @@ sobrenome = "Santos";
 
 //2 * pi * r
 const double PI = 3.1416;//const=constates é um valor que é não pode variar e nem ser alterado no codigo e são sempre maiusculas
-const int y = 2;
+const int Y = 2;
 
 float valor;
 
 cout << "idique o valor do raio";
 cin >> valor;
-cout << y * PI * 5 << endl;
+cout << Y * PI * 5 << endl;
 
 //operadores lógicos
 // ==    Igual
@@ -88,13 +88,13 @@ cout << "abc é igual a a" << endl;
 
 
 int ( x == 1);
-int ( y == 2);
+int ( Y == 2);
 
-if (y == 2 ) {
+if (Y == 2 ) {
     cout << "v igual a dois" << endl;
-}else if(y == 3){
+}else if(Y == 3){
     cout << "y é igual a três" << endl;
-}else if(y  == 4){
+}else if(Y  == 4){
     cout << "y é igual a quatro" << endl;
 
 }else{
@@ -104,7 +104,7 @@ if (y == 2 ) {
 
 
 //if comparar valores
-//else if vai ser chamada se a anterior for chamada
+//else if vai ser chamada se a anterior for falsa
 //switch é para selecionar um dos blocos de comando
 //while loop
 // do while executa pelo menos uma vez oque está no bloco de comando
