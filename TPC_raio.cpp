@@ -1,10 +1,10 @@
 #include <iostream>
 using namespace std;
-const float PI=3.1416;
+const float PI=3.14159;
 float raio;
 
 int main() {
-    cout << "idique o valor do raio" << endl;
+    cout << "Idique o valor do raio" << endl;
 cin >> raio;
 
 cout << "O perimetro da circunferência  é: "<< endl;
