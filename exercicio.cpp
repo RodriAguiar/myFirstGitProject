@@ -18,5 +18,5 @@ if(vogal == 'a' || vogal == 'e' || vogal == 'i' || vogal == 'o' || vogal == 'u')
 
 
 
-
+return 0;
 }
