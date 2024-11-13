@@ -68,8 +68,8 @@ cout << Y * PI * 5 << endl;
 //operadores lógicos
 // ==    Igual
 // !=    Diferente
-// <     Maior   
-// >     Menor
+// <     Menor   
+// >     Maior
 // >=    Maior ou igual 
 // <=    Menor ou igual
 // &&    e
