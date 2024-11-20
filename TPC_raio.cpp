@@ -13,6 +13,8 @@ cout << 2*PI*raio << endl;
 cout << "A área da circunferência é: " << endl;
 cout << PI*(raio*raio)<< endl;
 
+cout << "O diânmetro é: " << endl;
+cout << 2*raio << endl;
 
     return 0;
 }
