@@ -58,5 +58,8 @@ int main () {
 
 srand(time(0));
 int indice = rand () % 26;
+
+ alfabeto [26]= { a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z};
+
     return 0;
 }
