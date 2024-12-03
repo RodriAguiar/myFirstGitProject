@@ -48,7 +48,7 @@ cout << " " << endl;
  * 
  * O jogador terá que digitar uma letra e o computador dirá se a letra é maior ou menor qua a letra escolhida.
  * 
- * O jogo termina quando o jogador acertar a letra escolhida
+ * O jogo termina quando o jogador acertar a letra escolhida.Com um limite de 6 tentativas
  * 
  */
 
