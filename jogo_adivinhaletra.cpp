@@ -19,32 +19,32 @@ int main() {
     char letraEscolhida = alfabeto[rand() % 26];
     
     // Variáveis do jogo
-    char chute;
+    char adivinhação;
     int tentativas = 6;
     bool acertou = false;
 
     cout << "Bem-vindo ao jogo de adivinhar a letra!" << endl;
-    cout << "Tente adivinhar a letra escolhida pelo computador." << endl;
+    cout << "Tenta adivinhar a letra escolhida pelo computador." << endl;
     cout << "Tens " << tentativas << " tentativas." << endl;
 
     // Loop do jogo
     while (tentativas > 0) {
         cout << "\nDigite uma letra (a-z): ";
-        cin >> chute;
+        cin >> adivinhação;
 
         // Verifica se a entrada é válida
-        if (chute < 'a' || chute > 'z') {
+        if (adivinhação < 'a' || adivinhação > 'z') {
             cout << "Letra inválida! Por favor, coloque uma letra minúscula (a-z)." << endl;
             continue;
         }
 
-        if (chute == letraEscolhida) {
+        if (adivinhação == letraEscolhida) {
             acertou = true;
             break;
-        } else if (chute < letraEscolhida) {
-            cout << "A letra escolhida é maior que " << chute << "." << endl;
+        } else if (adivinhação < letraEscolhida) {
+            cout << "A letra escolhida é maior que " << adivinhação << "." << endl;
         } else {
-            cout << "A letra escolhida é menor que " << chute << "." << endl;
+            cout << "A letra escolhida é menor que " << adivinhação << "." << endl;
         }
 
         tentativas--;
