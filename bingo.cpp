@@ -9,7 +9,7 @@ int tamanhodocartao = 5;
  bool umcartoes = true;
  
  int main() {
-
+ srand(time(0));
 cout << "Bem vindo ao jogo do bingo!!" <<endl;
 cout << "Pode escolher entre 1 ou 2 cartões"<<endl;
  cout<< "Quantos cartoes deseja?:";
