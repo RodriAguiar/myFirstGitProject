@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <ctime>
 using namespace std;
- 
+ srand (time(0));
 
 int tamanhodocartao = 5; 
  int cartoes;
