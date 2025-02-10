@@ -34,7 +34,7 @@ int main() {
             if (c == tentativa && frase_oculta[i] == '_') {
                 frase_oculta[i] = c;
                
-                bool acerto = true;
+                 acerto = true;
                
             }
             i++;
