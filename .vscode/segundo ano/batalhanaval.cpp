@@ -26,14 +26,14 @@ using namespace std;
 
         if (x.boat == 1 && x.shot == 0 )
         {
-            return "\033[90m[]\033[37m" ;
+            return "\033[40m[]\033[37m" ;
         }
 
         if (x.boat == 0 && x.shot == 1 )
         {
-            return "\033[96m x \033[37m";
+            return "\033[96m x \033[47m";
         }
-        return "\033[96m ~\033[37m";
+        return "\033[46m ~\e[0m";
     }
     
     string linhaEstado(Nums matrix[10][10], int y)
@@ -158,6 +158,8 @@ using namespace std;
 
 int main(){
 
+
+    myMatrixA[0][0].boat = 1;
 
 
     table();
