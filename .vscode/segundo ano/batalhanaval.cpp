@@ -13,6 +13,19 @@ using namespace std;
         bool shot;
     };
 
+    struct Boat
+    {
+        string nome;
+        int tamanho;
+        Nums nums;
+    };
+
+    Boat AircraftCarrier = {"AircraftCarrier",5,{0,0}};
+    Boat Battleship ={"Battleship",4,{0,0}};
+    Boat Cruiser = {"Cruiser",3,{0,0}};
+    Boat Submarine = {"Submarine",3,{0,0}};
+    Boat Destroyer = {"Submarine",2,{0,0}};
+
         Nums myMatrixA[10][10];
         Nums myMatrixB[10][10];
 
@@ -21,7 +34,7 @@ using namespace std;
     {
         if (x.boat == 1 && x.shot == 1)
         {
-            return "\033[31m X\033[37m";
+            return "\033[31m [X]\033[37m";
         }
 
         if (x.boat == 1 && x.shot == 0 )
@@ -31,7 +44,7 @@ using namespace std;
 
         if (x.boat == 0 && x.shot == 1 )
         {
-            return "\033[96m x \033[47m";
+            return "\033[96m W \033[47m";
         }
         return "\033[46m ~\e[0m";
     }
@@ -87,6 +100,12 @@ using namespace std;
             << BLUE <<"10\033[37m|" << WHITE <<  linhaEstado(myMatrixB,10) << endl;
             cout << "  +--------------------+" << endl; 
             cout << "         PLAYER 1" << endl;
+            
+            cout << "Choose your ship and place it: " << endl;
+            cout << "+-------------------------------------------+\n" << "|R - To rotate|[Enter] To choose other ship |" << endl;
+            cout << "+-------------------------------------------+" <<endl;
+
+
     }
 
     void playerAct(){
@@ -94,7 +113,6 @@ using namespace std;
         char letra;
         int letraNum;
 
-        cin >> digito,letra;
     
         if (letra = 'a' || 'A')
         {
@@ -151,15 +169,13 @@ using namespace std;
             cout << "Este digito é invalido" << endl;
         };
 
-
-        
-
     };
 
 int main(){
 
 
-    myMatrixA[0][0].boat = 1;
+    myMatrixA[1][1].boat = 1;
+    myMatrixA[1][1].shot = 1;
 
 
     table();
