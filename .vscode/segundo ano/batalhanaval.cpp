@@ -6,6 +6,9 @@ using namespace std;
 #define BLUE    "\033[34m"
 #define WHITE   "\033[37m"
 
+int cordX,cordY;
+
+
 
     struct Nums
     {
@@ -44,7 +47,7 @@ using namespace std;
 
         if (x.boat == 0 && x.shot == 1 )
         {
-            return "\033[96m W \033[47m";
+            return "\033[96mW \033[47m";
         }
         return "\033[46m ~\e[0m";
     }
@@ -69,35 +72,35 @@ using namespace std;
     {
             system("clear");
 
-            cout << RED <<"    A B C D E F G H I J" << endl;
+            cout << RED <<"   1 2 3 4 5 6 7 8 9 10" << endl;
             cout << WHITE << "  +--------------------+" << endl;
-            cout << BLUE <<" 1\033[37m|" << WHITE << linhaEstado(myMatrixA,1) << endl
-            << BLUE <<" 2\033[37m|" << WHITE <<  linhaEstado(myMatrixA,2) << endl
-            << BLUE <<" 3\033[37m|" << WHITE <<  linhaEstado(myMatrixA,3) << endl
-            << BLUE <<" 4\033[37m|" << WHITE <<  linhaEstado(myMatrixA,4) << endl
-            << BLUE <<" 5\033[37m|" << WHITE <<  linhaEstado(myMatrixA,5) << endl
-            << BLUE <<" 6\033[37m|" << WHITE <<  linhaEstado(myMatrixA,6) << endl
-            << BLUE <<" 7\033[37m|" << WHITE <<  linhaEstado(myMatrixA,7) << endl
-            << BLUE <<" 8\033[37m|" << WHITE <<  linhaEstado(myMatrixA,8) << endl
-            << BLUE <<" 9\033[37m|" << WHITE <<  linhaEstado(myMatrixA,9) << endl
-            << BLUE <<"10\033[37m|" << WHITE <<  linhaEstado(myMatrixA,10) << endl;
+            cout << BLUE <<" A\033[37m|" << WHITE << linhaEstado(myMatrixA,1) << endl
+            << BLUE <<" B\033[37m|" << WHITE <<  linhaEstado(myMatrixA,2) << endl
+            << BLUE <<" C\033[37m|" << WHITE <<  linhaEstado(myMatrixA,3) << endl
+            << BLUE <<" D\033[37m|" << WHITE <<  linhaEstado(myMatrixA,4) << endl
+            << BLUE <<" E\033[37m|" << WHITE <<  linhaEstado(myMatrixA,5) << endl
+            << BLUE <<" F\033[37m|" << WHITE <<  linhaEstado(myMatrixA,6) << endl
+            << BLUE <<" G\033[37m|" << WHITE <<  linhaEstado(myMatrixA,7) << endl
+            << BLUE <<" H\033[37m|" << WHITE <<  linhaEstado(myMatrixA,8) << endl
+            << BLUE <<" I\033[37m|" << WHITE <<  linhaEstado(myMatrixA,9) << endl
+            << BLUE <<" J\033[37m|" << WHITE <<  linhaEstado(myMatrixA,10) << endl;
             cout << "  +--------------------+" << endl;
             cout << "         PLAYER 2" << endl;
 
         cout << "  ______________________\n" << endl;
 
-            cout << RED <<"    A B C D E F G H I J" << endl;
+            cout << RED <<"   1 2 3 4 5 6 7 8 9 10" << endl;
             cout << WHITE << "  +--------------------+" << endl;
-            cout << BLUE <<" 1\033[37m|" << WHITE << linhaEstado(myMatrixB,1) << endl
-            << BLUE <<" 2\033[37m|" << WHITE <<  linhaEstado(myMatrixB,2) << endl
-            << BLUE <<" 3\033[37m|" << WHITE <<  linhaEstado(myMatrixB,3) << endl
-            << BLUE <<" 4\033[37m|" << WHITE <<  linhaEstado(myMatrixB,4) << endl
-            << BLUE <<" 5\033[37m|" << WHITE <<  linhaEstado(myMatrixB,5) << endl
-            << BLUE <<" 6\033[37m|" << WHITE <<  linhaEstado(myMatrixB,6) << endl
-            << BLUE <<" 7\033[37m|" << WHITE <<  linhaEstado(myMatrixB,7) << endl
-            << BLUE <<" 8\033[37m|" << WHITE <<  linhaEstado(myMatrixB,8) << endl
-            << BLUE <<" 9\033[37m|" << WHITE <<  linhaEstado(myMatrixB,9) << endl
-            << BLUE <<"10\033[37m|" << WHITE <<  linhaEstado(myMatrixB,10) << endl;
+            cout << BLUE <<" A\033[37m|" << WHITE << linhaEstado(myMatrixB,1) << endl
+            << BLUE <<" B\033[37m|" << WHITE <<  linhaEstado(myMatrixB,2) << endl
+            << BLUE <<" C\033[37m|" << WHITE <<  linhaEstado(myMatrixB,3) << endl
+            << BLUE <<" D\033[37m|" << WHITE <<  linhaEstado(myMatrixB,4) << endl
+            << BLUE <<" E\033[37m|" << WHITE <<  linhaEstado(myMatrixB,5) << endl
+            << BLUE <<" F\033[37m|" << WHITE <<  linhaEstado(myMatrixB,6) << endl
+            << BLUE <<" G\033[37m|" << WHITE <<  linhaEstado(myMatrixB,7) << endl
+            << BLUE <<" H\033[37m|" << WHITE <<  linhaEstado(myMatrixB,8) << endl
+            << BLUE <<" I\033[37m|" << WHITE <<  linhaEstado(myMatrixB,9) << endl
+            << BLUE <<" J\033[37m|" << WHITE <<  linhaEstado(myMatrixB,10) << endl;
             cout << "  +--------------------+" << endl; 
             cout << "         PLAYER 1" << endl;
             
@@ -108,35 +111,36 @@ using namespace std;
 
     }
 
-    void playerAct(){
-        int digito;
-        char letra;
-        int letraNum;
-
+    void playerAct(int& cordX, int& cordY){
     
-        if (letra = 'a' || 'A')
+        string input;
+
+        cout << "You: ";
+        cin >> input;
+    
+        if (input[0] == 'A' || input[0] = 'a')
         {
-            letraNum == 1;
+            cordY == 0;
         }
 
-        if (letra = 'b' || 'B'){
+        else if (input[0] == 'b' || input[0] 'B')
+        {
+            cordY == 1;
+        }
 
-           letraNum == 2;
-        };
+        if (input[0] == 'c' || 'C'){
 
-        if (letra = 'c' || 'C'){
-
-            letraNum == 3;
+            cordY == 2;
          };
 
-        if (letra = 'd' || 'D'){
+        if (input[0] = 'd' || 'D'){
 
-            letraNum == 4;
+            cordY == 3;
          };
  
         if (letra = 'e' || 'E'){
  
-             letraNum == 5;
+             letraNum == 4;
           };
 
         if (letra = 'f' || 'F')
@@ -169,18 +173,20 @@ using namespace std;
             cout << "Este digito é invalido" << endl;
         };
 
+
+
     };
 
+
 int main(){
-
-
-    myMatrixA[1][1].boat = 1;
+    myMatrixA[1][1].boat = 0;
     myMatrixA[1][1].shot = 1;
 
 
     table();
-    playerAct();
 
+
+    playerAct(a,b);
 
     return 0;
 }
