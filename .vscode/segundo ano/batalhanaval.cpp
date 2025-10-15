@@ -118,75 +118,163 @@ int cordX,cordY;
         cout << "You: ";
         cin >> input;
     
-        if (input[0] == 'A' || input[0] = 'a')
+        if (input[0] == 'a' || input[0] == 'A')
         {
             cordY == 0;
         }
 
-        else if (input[0] == 'b' || input[0] 'B')
+        else if (input[0] == 'b' || input[0] == 'B')
         {
             cordY == 1;
         }
 
-        if (input[0] == 'c' || 'C'){
+        else if(input[0] == 'c' || input[0] =='C'){
 
             cordY == 2;
-         };
+         }
 
-        if (input[0] = 'd' || 'D'){
+         else if(input[0] = 'd' || input[0] =='D'){
 
             cordY == 3;
-         };
+         }
  
-        if (letra = 'e' || 'E'){
+         else if ( input[0] == 'e' || input[0] =='E'){
  
-             letraNum == 4;
-          };
+            cordY== 4;
+          }
 
-        if (letra = 'f' || 'F')
+          else if(input[0] ==  'f' || input[0] == 'F')
           {
-              letraNum == 6;
+            cordY == 6;
           }
   
-        if (letra = 'g' || 'G'){
+          else if(input[0] == 'g' || input[0] == 'G'){
   
-             letraNum == 7;
-          };
+            cordY== 7;
+          }
   
-        if (letra = 'h' || 'H'){
+          else if (input[0] == 'h' ||input[0] ==  'H'){
   
-              letraNum == 8;
-           };
+            cordY == 8;
+           }
   
-        if (letra = 'i' || 'I'){
+           else if(input[0] ==  'i' ||input[0] ==  'I'){
   
-              letraNum == 9;
-           };
+            cordY == 9;
+           }
    
-        if (letra = 'j' || 'J'){
+           else if(input[0] == 'j' || input[0] == 'J'){
    
-               letraNum == 10;
-            };
+            cordY == 10;
+            }
 
-        if (digito,letraNum > 10 || digito,letraNum < 1){
+        else if (cordX,cordY > 10 || cordX,cordY < 1){
 
             cout << "Este digito é invalido" << endl;
         };
 
+        switch (size(input))
+        {
+            case 2:
+
+            if (input[1]== '1')
+            {
+                cordX = 0;
+            }
+            else if (input[1]== '2')
+            {
+                cordX = 1;
+            }
+            else if (input[1]== '3')
+            {
+                cordX = 2;
+            }
+            else if (input[1]== '4')
+            {
+                cordX = 3;
+            }
+            else if (input[1]== '5')
+            {
+                cordX = 4;
+            }
+            else if (input[1]== '6')
+            {
+                cordX = 5;
+            }
+            else if (input[1]== '7')
+            {
+                cordX = 6;
+            }
+            else if (input[1]== '8')
+            {
+                cordX = 7;
+            }
+            else if (input[1]== '9')
+            {
+                cordX = 8;
+            }
+            else{
+                cordX = -1;
+            }
+            break;
+        
+            case 3:
+
+            if(input[1] == '1' && input[2] == '0'){
+                cordX = 9;
+            }else{
+
+                cordX = -1;
+            }
+            break;
+
+            default:
+            cordX = -1; 
+            cordY = -1;
+                break;
+            }
+    };
+
+    void shotact(int& cordX, int& cordY){
+
+        if (myMatrixA[cordY][cordX].boat == 1 ){
+
+            myMatrixA[cordY][cordX].shot == 1;
+        }
+        else {
+            myMatrixA[cordY][cordX].shot == 1;
+        }
+         
+        if (myMatrixB[cordY][cordX].boat == 1 ){
+
+            myMatrixB[cordY][cordX].shot == 1;
+        }
+        else {
+            myMatrixB[cordY][cordX].shot == 1;
+        }
+
+    }
+
+    void boatact(int& cordX,int& cordY){
+        
 
 
     };
 
-
 int main(){
-    myMatrixA[1][1].boat = 0;
-    myMatrixA[1][1].shot = 1;
 
+    int life = 10;
 
-    table();
-
-
-    playerAct(a,b);
-
+    while (life == 0)
+    {
+    
+        table();
+    
+        int x, y;
+        myMatrixB[1][1].boat = 1;
+        playerAct(x, y);
+        myMatrixB[cordY][cordX].boat = 1;
+        life --;
+    };
     return 0;
 }
