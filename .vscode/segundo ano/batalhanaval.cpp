@@ -1,280 +1,214 @@
 #include <iostream>
 using namespace std;
 
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define BLUE    "\033[34m"
-#define WHITE   "\033[37m"
+#define RESET "\033[0m"
+#define RED "\033[31m"
+#define BLUE "\033[34m"
+#define WHITE "\033[37m"
+#define CYAN "\033[36m"
+#define YELLOW "\033[33m"
+#define BGGRAY "\033[100m"
 
-int cordX,cordY;
+int cordX, cordY;
+bool vertical = 0;
 
+struct Nums {
+    bool boat;
+    bool shot;
+};
 
+struct Boat {
+    string nome;
+    int tamanho;
+    Nums nums;
+};
 
-    struct Nums
-    {
-        bool boat;        
-        bool shot;
-    };
+Boat barcos[]{
+    {"AircraftCarrier",5,{0,0}},
+    {"Battleship",4,{0,0}},
+    {"Cruiser",3,{0,0}},
+    {"Submarine",3,{0,0}},
+    {"Destroyer",2,{0,0}}
+};
 
-    struct Boat
-    {
-        string nome;
-        int tamanho;
-        Nums nums;
-    };
+Nums myMatrixA[10][10];
+Nums myMatrixB[10][10];
 
-    Boat AircraftCarrier = {"AircraftCarrier",5,{0,0}};
-    Boat Battleship ={"Battleship",4,{0,0}};
-    Boat Cruiser = {"Cruiser",3,{0,0}};
-    Boat Submarine = {"Submarine",3,{0,0}};
-    Boat Destroyer = {"Submarine",2,{0,0}};
+// Função para estado visual da célula
+string estado(Nums x, bool oculto = false) {
+    if(x.boat && x.shot) return string(RED)+"[X]"+RESET;
+    if(!x.boat && x.shot) return string(CYAN)+" W "+RESET;
+    if(x.boat && !x.shot && !oculto) return string(BGGRAY)+"[ ]"+RESET;
+    return string(BLUE)+" ~ "+RESET;
+}
 
-        Nums myMatrixA[10][10];
-        Nums myMatrixB[10][10];
+// Linha do tabuleiro
+string linhaEstado(Nums matrix[10][10], int y, bool oculto=false) {
+    string linha = "";
+    for(int i=0; i<10; i++) linha += estado(matrix[i][y], oculto);
+    return linha;
+}
 
-    string estado(Nums x)
+// Tabela do jogador atual (durante posicionamento)
+void table(Nums Player[10][10], int jogador) {
+    cout << YELLOW << "   1  2  3  4  5  6  7  8  9  10" << RESET << endl;
+    cout << WHITE << " +------------------------------+" << RESET << endl;
+    for(int y=0;y<10;y++)
+        cout << char('A'+y) << WHITE << "|" << linhaEstado(Player,y,false) << endl;
+    cout << WHITE << " +------------------------------+" << RESET << endl;
+    cout << " PLAYER " << jogador << endl;
+    cout << YELLOW << "\n[1] Rotacionar  |  [0] Próximo barco" << RESET << endl;
+}
 
-    {
-        if (x.boat == 1 && x.shot == 1)
-        {
-            return "\033[31m [X]\033[37m";
+// Tabela oculta (histórico de tiros)
+void tableHidden(Nums Player[10][10], int jogador){
+    cout << YELLOW << "   1  2  3  4  5  6  7  8  9  10" << RESET << endl;
+    cout << WHITE << " +------------------------------+" << RESET << endl;
+    for(int y=0;y<10;y++){
+        cout << char('A'+y) << WHITE << "|";
+        for(int x=0;x<10;x++){
+            if(Player[x][y].shot && Player[x][y].boat)
+                cout << RED << "[X]" << RESET;
+            else if(Player[x][y].shot)
+                cout << CYAN << " W " << RESET;
+            else
+                cout << BLUE << " ~ " << RESET;
         }
-
-        if (x.boat == 1 && x.shot == 0 )
-        {
-            return "\033[40m[]\033[37m" ;
-        }
-
-        if (x.boat == 0 && x.shot == 1 )
-        {
-            return "\033[96mW \033[47m";
-        }
-        return "\033[46m ~\e[0m";
+        cout << endl;
     }
-    
-    string linhaEstado(Nums matrix[10][10], int y)
-    {
-        string linha = "";
-        linha += estado(matrix[1][y]);
-        linha += estado(matrix[2][y]);
-        linha += estado(matrix[3][y]);
-        linha += estado(matrix[4][y]);
-        linha += estado(matrix[5][y]);
-        linha += estado(matrix[6][y]);
-        linha += estado(matrix[7][y]);
-        linha += estado(matrix[8][y]);
-        linha += estado(matrix[9][y]);
-        linha += estado(matrix[10][y]);
-        return linha;
-    }
+    cout << WHITE << " +------------------------------+" << RESET << endl;
+    cout << " PLAYER " << jogador << endl;
+}
 
-    void table()
-    {
-            system("clear");
+// Ler coordenadas tipo "A5"
+void playerAct(int& cordX,int& cordY){
+    string input;
+    cout << "You: ";
+    cin >> input;
 
-            cout << RED <<"   1 2 3 4 5 6 7 8 9 10" << endl;
-            cout << WHITE << "  +--------------------+" << endl;
-            cout << BLUE <<" A\033[37m|" << WHITE << linhaEstado(myMatrixA,1) << endl
-            << BLUE <<" B\033[37m|" << WHITE <<  linhaEstado(myMatrixA,2) << endl
-            << BLUE <<" C\033[37m|" << WHITE <<  linhaEstado(myMatrixA,3) << endl
-            << BLUE <<" D\033[37m|" << WHITE <<  linhaEstado(myMatrixA,4) << endl
-            << BLUE <<" E\033[37m|" << WHITE <<  linhaEstado(myMatrixA,5) << endl
-            << BLUE <<" F\033[37m|" << WHITE <<  linhaEstado(myMatrixA,6) << endl
-            << BLUE <<" G\033[37m|" << WHITE <<  linhaEstado(myMatrixA,7) << endl
-            << BLUE <<" H\033[37m|" << WHITE <<  linhaEstado(myMatrixA,8) << endl
-            << BLUE <<" I\033[37m|" << WHITE <<  linhaEstado(myMatrixA,9) << endl
-            << BLUE <<" J\033[37m|" << WHITE <<  linhaEstado(myMatrixA,10) << endl;
-            cout << "  +--------------------+" << endl;
-            cout << "         PLAYER 2" << endl;
-
-        cout << "  ______________________\n" << endl;
-
-            cout << RED <<"   1 2 3 4 5 6 7 8 9 10" << endl;
-            cout << WHITE << "  +--------------------+" << endl;
-            cout << BLUE <<" A\033[37m|" << WHITE << linhaEstado(myMatrixB,1) << endl
-            << BLUE <<" B\033[37m|" << WHITE <<  linhaEstado(myMatrixB,2) << endl
-            << BLUE <<" C\033[37m|" << WHITE <<  linhaEstado(myMatrixB,3) << endl
-            << BLUE <<" D\033[37m|" << WHITE <<  linhaEstado(myMatrixB,4) << endl
-            << BLUE <<" E\033[37m|" << WHITE <<  linhaEstado(myMatrixB,5) << endl
-            << BLUE <<" F\033[37m|" << WHITE <<  linhaEstado(myMatrixB,6) << endl
-            << BLUE <<" G\033[37m|" << WHITE <<  linhaEstado(myMatrixB,7) << endl
-            << BLUE <<" H\033[37m|" << WHITE <<  linhaEstado(myMatrixB,8) << endl
-            << BLUE <<" I\033[37m|" << WHITE <<  linhaEstado(myMatrixB,9) << endl
-            << BLUE <<" J\033[37m|" << WHITE <<  linhaEstado(myMatrixB,10) << endl;
-            cout << "  +--------------------+" << endl; 
-            cout << "         PLAYER 1" << endl;
-            
-            cout << "Choose your ship and place it: " << endl;
-            cout << "+-------------------------------------------+\n" << "|R - To rotate|[Enter] To choose other ship |" << endl;
-            cout << "+-------------------------------------------+" <<endl;
-
-
+    if (input == "1") {
+        vertical = !vertical;
+        cout << "Direção alterada para: "
+             << (vertical ? "Vertical" : "Horizontal") << endl;
+        cordX = -2;
+        cordY = -2;
+        return;
     }
 
-    void playerAct(int& cordX, int& cordY){
-    
-        string input;
+    if (input[0] == 'a' || input[0] == 'A') cordY = 0;
+    else if (input[0] == 'b' || input[0] == 'B') cordY = 1;
+    else if(input[0] == 'c' || input[0] =='C') cordY = 2;
+    else if(input[0] == 'd' || input[0] =='D') cordY = 3;
+    else if(input[0] == 'e' || input[0] =='E') cordY = 4;
+    else if(input[0] == 'f' || input[0] == 'F') cordY = 5;
+    else if(input[0] == 'g' || input[0] == 'G') cordY = 6;
+    else if(input[0] == 'h' || input[0] == 'H') cordY = 7;
+    else if(input[0] == 'i' || input[0] == 'I') cordY = 8;
+    else if(input[0] == 'j' || input[0] == 'J') cordY = 9;
+    else cordY=-1;
 
-        cout << "You: ";
-        cin >> input;
-    
-        if (input[0] == 'a' || input[0] == 'A')
-        {
-            cordY == 0;
-        }
-
-        else if (input[0] == 'b' || input[0] == 'B')
-        {
-            cordY == 1;
-        }
-
-        else if(input[0] == 'c' || input[0] =='C'){
-
-            cordY == 2;
-         }
-
-         else if(input[0] = 'd' || input[0] =='D'){
-
-            cordY == 3;
-         }
- 
-         else if ( input[0] == 'e' || input[0] =='E'){
- 
-            cordY== 4;
-          }
-
-          else if(input[0] ==  'f' || input[0] == 'F')
-          {
-            cordY == 6;
-          }
-  
-          else if(input[0] == 'g' || input[0] == 'G'){
-  
-            cordY== 7;
-          }
-  
-          else if (input[0] == 'h' ||input[0] ==  'H'){
-  
-            cordY == 8;
-           }
-  
-           else if(input[0] ==  'i' ||input[0] ==  'I'){
-  
-            cordY == 9;
-           }
-   
-           else if(input[0] == 'j' || input[0] == 'J'){
-   
-            cordY == 10;
-            }
-
-        else if (cordX,cordY > 10 || cordX,cordY < 1){
-
-            cout << "Este digito é invalido" << endl;
-        };
-
-        switch (size(input))
-        {
-            case 2:
-
-            if (input[1]== '1')
-            {
-                cordX = 0;
-            }
-            else if (input[1]== '2')
-            {
-                cordX = 1;
-            }
-            else if (input[1]== '3')
-            {
-                cordX = 2;
-            }
-            else if (input[1]== '4')
-            {
-                cordX = 3;
-            }
-            else if (input[1]== '5')
-            {
-                cordX = 4;
-            }
-            else if (input[1]== '6')
-            {
-                cordX = 5;
-            }
-            else if (input[1]== '7')
-            {
-                cordX = 6;
-            }
-            else if (input[1]== '8')
-            {
-                cordX = 7;
-            }
-            else if (input[1]== '9')
-            {
-                cordX = 8;
-            }
-            else{
-                cordX = -1;
-            }
-            break;
-        
-            case 3:
-
-            if(input[1] == '1' && input[2] == '0'){
-                cordX = 9;
-            }else{
-
-                cordX = -1;
-            }
-            break;
-
-            default:
-            cordX = -1; 
-            cordY = -1;
-                break;
-            }
-    };
-
-    void shotact(int& cordX, int& cordY){
-
-        if (myMatrixA[cordY][cordX].boat == 1 ){
-
-            myMatrixA[cordY][cordX].shot == 1;
-        }
-        else {
-            myMatrixA[cordY][cordX].shot == 1;
-        }
-         
-        if (myMatrixB[cordY][cordX].boat == 1 ){
-
-            myMatrixB[cordY][cordX].shot == 1;
-        }
-        else {
-            myMatrixB[cordY][cordX].shot == 1;
-        }
-
+    switch (input.size()){
+        case 2: cordX = input[1]-'1'; break;
+        case 3: if(input[1]=='1' && input[2]=='0') cordX=9; else cordX=-1; break;
+        default: cordX=-1; break;
     }
+}
+// Colocar barco na matriz
+void diresao(Nums MyMatrix[10][10], int cordX, int cordY, Boat barco){
+    if(vertical){
+        if(cordY+barco.tamanho>10){ cout<<RED<<" O barco não cabe verticalmente!"<<RESET<<endl; return; }
+        for(int i=0;i<barco.tamanho;i++) MyMatrix[cordX][cordY+i].boat=true;
+    } else {
+        if(cordX+barco.tamanho>10){ cout<<RED<<" O barco não cabe horizontalmente!"<<RESET<<endl; return; }
+        for(int i=0;i<barco.tamanho;i++) MyMatrix[cordX+i][cordY].boat=true;
+    }
+}
 
-    void boatact(int& cordX,int& cordY){
-        
+// Verificar se todos os barcos afundaram
+bool allBoatsSunk(Nums MyMatrix[10][10]){
+    for(int y=0;y<10;y++)
+        for(int x=0;x<10;x++)
+            if(MyMatrix[x][y].boat && !MyMatrix[x][y].shot) return false;
+    return true;
+}
 
-
-    };
+// Atirar — grava tiros e evita repetir
+bool shotact(Nums MyMatrix[10][10], int cordX,int cordY){
+    if(cordX<0||cordX>=10||cordY<0||cordY>=10) return false;
+    if(MyMatrix[cordX][cordY].shot){
+        cout<<RED<<"\nJá atiraste aqui! Tenta outra."<<RESET<<endl;
+        return false;
+    }
+    MyMatrix[cordX][cordY].shot=true;
+    return true;
+}
 
 int main(){
+    cout << YELLOW << "\n--- BATALHA NAVAL 2 JOGADORES ---\n" << RESET;
 
-    int life = 10;
+    // ===== POSICIONAMENTO =====
+    for(int jogador=1;jogador<=2;jogador++){
+        Nums (*matriz)[10] = (jogador==1)?myMatrixA:myMatrixB;
+        cout << "\n" << CYAN << "Jogador "<<jogador<<", coloque seus barcos!"<<RESET<<endl;
+        cout << "O outro jogador não pode olhar. Pressiona ENTER...";
+        cin.ignore(); cin.get();
 
-    while (life == 0)
-    {
-    
-        table();
-    
-        int x, y;
-        myMatrixB[1][1].boat = 1;
-        playerAct(x, y);
-        myMatrixB[cordY][cordX].boat = 1;
-        life --;
-    };
+        int barcoAtual=0;
+        while(barcoAtual<5){
+            system("clear");
+            table(matriz,jogador);
+            cout << "Colocando: " << YELLOW << barcos[barcoAtual].nome << RESET
+                 << " (" << barcos[barcoAtual].tamanho << " espaços)" << endl;
+
+            playerAct(cordX,cordY);
+
+            if(cordX==-2 && cordY==-2) continue; // só rodou
+
+            if(cordX>=0 && cordY>=0 && cordX<10 && cordY<10){
+                diresao(matriz,cordX,cordY,barcos[barcoAtual]);
+                system("clear");
+                table(matriz,jogador); // mostra tabuleiro atualizado
+                barcoAtual++;
+            } else {
+                cout<<RED<<"Coordenada inválida! Tente novamente."<<RESET<<endl;
+            }
+        }
+
+        cout << CYAN << "\nJogador "<<jogador<<" terminou o posicionamento!"<<RESET<<endl;
+        cout << "Pressiona ENTER para passar para o próximo jogador...";
+        cin.ignore(); cin.get();
+
+        system("clear");
+        tableHidden(matriz,jogador); // tela neutra
+        cout << "Pressiona ENTER para continuar...";
+        cin.get();
+    }
+
+    // ===== FASE DE ATAQUE =====
+    bool gameover=false;
+    while(!gameover){
+        // Jogador 1
+        system("clear");
+        cout << "\n" << CYAN << "PLAYER 1, é a tua vez!" << RESET << endl;
+        tableHidden(myMatrixB,2);
+        bool valido=false;
+        while(!valido){
+            playerAct(cordX,cordY);
+            valido = shotact(myMatrixB,cordX,cordY);
+        }
+        if(allBoatsSunk(myMatrixB)){ cout << YELLOW << "🏆 PLAYER 1 VENCEU!" << RESET << endl; break; }
+
+        // Jogador 2
+        system("clear");
+        cout << "\n" << CYAN << "PLAYER 2, é a tua vez!" << RESET << endl;
+        tableHidden(myMatrixA,1);
+        valido=false;
+        while(!valido){
+            playerAct(cordX,cordY);
+            valido = shotact(myMatrixA,cordX,cordY);
+        }
+        if(allBoatsSunk(myMatrixA)){ cout << YELLOW << "🏆 PLAYER 2 VENCEU!" << RESET << endl; break; }
+    }
+
     return 0;
 }
