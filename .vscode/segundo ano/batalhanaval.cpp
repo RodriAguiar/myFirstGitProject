@@ -144,6 +144,7 @@ bool shotact(Nums MyMatrix[10][10], int cordX,int cordY){
 }
 
 int main(){
+    //Feito por: Rodrigo Aguiar e Rodrigo Martins
     cout << YELLOW << "\n--- BATALHA NAVAL 2 JOGADORES ---\n" << RESET;
 
     // ===== POSICIONAMENTO =====
