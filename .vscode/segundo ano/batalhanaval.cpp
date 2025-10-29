@@ -49,15 +49,33 @@ string linhaEstado(Nums matrix[10][10], int y, bool oculto=false) {
     return linha;
 }
 
+// Direção-barco
+void direcao(bool &vertical,Boat &barcos){  
+    if(vertical==0){
+        
+        for(int i=0;i<barcos.tamanho;i++){
+            cout<<"[*]";
+ }
+    }else if(vertical==1){
+        for(int i=0;i<barcos.tamanho;i++){
+            cout<<"[*]"<<endl;
+    }
+}
+}
+
 // Tabela do jogador atual (durante posicionamento)
 void table(Nums Player[10][10], int jogador) {
+    int escolha=0;
     cout << YELLOW << "   1  2  3  4  5  6  7  8  9  10" << RESET << endl;
     cout << WHITE << " +------------------------------+" << RESET << endl;
     for(int y=0;y<10;y++)
         cout << char('A'+y) << WHITE << "|" << linhaEstado(Player,y,false) << endl;
     cout << WHITE << " +------------------------------+" << RESET << endl;
     cout << " PLAYER " << jogador << endl;
-    cout << YELLOW << "\n[1] Rotacionar  |  [0] Próximo barco" << RESET << endl;
+    if(barcos->nums.boat=1){
+    direcao(vertical,barcos[0]);
+    }
+    cout << YELLOW << "\n[1] Rotacionar  " << RESET << endl;
 }
 
 // Tabela oculta (histórico de tiros)
@@ -143,6 +161,7 @@ bool shotact(Nums MyMatrix[10][10], int cordX,int cordY){
     return true;
 }
 
+
 int main(){
     //Feito por: Rodrigo Aguiar e Rodrigo Martins
     cout << YELLOW << "\n--- BATALHA NAVAL 2 JOGADORES ---\n" << RESET;
@@ -209,7 +228,7 @@ int main(){
             valido = shotact(myMatrixA,cordX,cordY);
         }
         if(allBoatsSunk(myMatrixA)){ cout << YELLOW << "🏆 PLAYER 2 VENCEU!" << RESET << endl; break; }
-    }
+    } 
 
     return 0;
 }
