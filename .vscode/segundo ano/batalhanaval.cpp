@@ -1,4 +1,6 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 using namespace std;
 
 #define RESET "\033[0m"
@@ -52,30 +54,27 @@ string linhaEstado(Nums matrix[10][10], int y, bool oculto=false) {
 // Direção-barco
 void direcao(bool &vertical,Boat &barcos){  
     if(vertical==0){
-        
         for(int i=0;i<barcos.tamanho;i++){
             cout<<"[*]";
- }
+        }
     }else if(vertical==1){
         for(int i=0;i<barcos.tamanho;i++){
             cout<<"[*]"<<endl;
+        }
     }
-}
 }
 
 // Tabela do jogador atual (durante posicionamento)
 void table(Nums Player[10][10], int jogador) {
-    int escolha=0;
     cout << YELLOW << "   1  2  3  4  5  6  7  8  9  10" << RESET << endl;
     cout << WHITE << " +------------------------------+" << RESET << endl;
     for(int y=0;y<10;y++)
         cout << char('A'+y) << WHITE << "|" << linhaEstado(Player,y,false) << endl;
     cout << WHITE << " +------------------------------+" << RESET << endl;
     cout << " PLAYER " << jogador << endl;
-    if(barcos->nums.boat=1){
     direcao(vertical,barcos[0]);
-    }
     cout << YELLOW << "\n[1] Rotacionar  " << RESET << endl;
+
 }
 
 // Tabela oculta (histórico de tiros)
@@ -131,14 +130,34 @@ void playerAct(int& cordX,int& cordY){
         default: cordX=-1; break;
     }
 }
-// Colocar barco na matriz
-void diresao(Nums MyMatrix[10][10], int cordX, int cordY, Boat barco){
+
+// Função que verifica se o barco pode ser colocado sem sobreposição
+bool podeColocar(Nums MyMatrix[10][10], int cordX, int cordY, Boat barco) {
     if(vertical){
-        if(cordY+barco.tamanho>10){ cout<<RED<<" O barco não cabe verticalmente!"<<RESET<<endl; return; }
-        for(int i=0;i<barco.tamanho;i++) MyMatrix[cordX][cordY+i].boat=true;
+        if(cordY + barco.tamanho > 10) return false;
+        for(int i=0; i<barco.tamanho; i++)
+            if(MyMatrix[cordX][cordY+i].boat) return false;
     } else {
-        if(cordX+barco.tamanho>10){ cout<<RED<<" O barco não cabe horizontalmente!"<<RESET<<endl; return; }
-        for(int i=0;i<barco.tamanho;i++) MyMatrix[cordX+i][cordY].boat=true;
+        if(cordX + barco.tamanho > 10) return false;
+        for(int i=0; i<barco.tamanho; i++)
+            if(MyMatrix[cordX+i][cordY].boat) return false;
+    }
+    return true;
+}
+
+// Colocar barco na matriz (sem sobreposição)
+void diresao(Nums MyMatrix[10][10], int cordX, int cordY, Boat barco){
+    if(!podeColocar(MyMatrix, cordX, cordY, barco)){
+        cout << RED << "❌ O barco não pode ser colocado aqui! Há outro barco ou ultrapassa o limite." << RESET << endl;
+        return;
+    }
+
+    if(vertical){
+        for(int i=0;i<barco.tamanho;i++)
+            MyMatrix[cordX][cordY+i].boat = true;
+    } else {
+        for(int i=0;i<barco.tamanho;i++)
+            MyMatrix[cordX+i][cordY].boat = true;
     }
 }
 
@@ -161,9 +180,7 @@ bool shotact(Nums MyMatrix[10][10], int cordX,int cordY){
     return true;
 }
 
-
 int main(){
-    //Feito por: Rodrigo Aguiar e Rodrigo Martins
     cout << YELLOW << "\n--- BATALHA NAVAL 2 JOGADORES ---\n" << RESET;
 
     // ===== POSICIONAMENTO =====
@@ -181,16 +198,22 @@ int main(){
                  << " (" << barcos[barcoAtual].tamanho << " espaços)" << endl;
 
             playerAct(cordX,cordY);
-
             if(cordX==-2 && cordY==-2) continue; // só rodou
 
             if(cordX>=0 && cordY>=0 && cordX<10 && cordY<10){
+                if(!podeColocar(matriz, cordX, cordY, barcos[barcoAtual])){
+                    cout << RED << "❌ Sobreposição detectada! Escolhe outra posição." << RESET << endl;
+                    std::this_thread::sleep_for(std::chrono::seconds(2));
+                    continue;
+                }
+
                 diresao(matriz,cordX,cordY,barcos[barcoAtual]);
                 system("clear");
                 table(matriz,jogador); // mostra tabuleiro atualizado
                 barcoAtual++;
             } else {
                 cout<<RED<<"Coordenada inválida! Tente novamente."<<RESET<<endl;
+                std::this_thread::sleep_for(std::chrono::seconds(2));
             }
         }
 
@@ -218,8 +241,12 @@ int main(){
         }
         if(allBoatsSunk(myMatrixB)){ cout << YELLOW << "🏆 PLAYER 1 VENCEU!" << RESET << endl; break; }
 
-        // Jogador 2
+        cout << CYAN << "\nPressiona ENTER para passar ao jogador 2..." << RESET << endl;
+        cin.ignore(); cin.get();
         system("clear");
+        std::this_thread::sleep_for(std::chrono::seconds(2));
+
+        // Jogador 2
         cout << "\n" << CYAN << "PLAYER 2, é a tua vez!" << RESET << endl;
         tableHidden(myMatrixA,1);
         valido=false;
@@ -228,6 +255,11 @@ int main(){
             valido = shotact(myMatrixA,cordX,cordY);
         }
         if(allBoatsSunk(myMatrixA)){ cout << YELLOW << "🏆 PLAYER 2 VENCEU!" << RESET << endl; break; }
+
+        cout << CYAN << "\nPressiona ENTER para passar ao jogador 1..." << RESET << endl;
+        cin.ignore(); cin.get();
+        system("clear");
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     } 
 
     return 0;
