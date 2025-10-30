@@ -244,7 +244,10 @@ int main(){
         cout << CYAN << "\nPressiona ENTER para passar ao jogador 2..." << RESET << endl;
         cin.ignore(); cin.get();
         system("clear");
+        cout << RED "Esperando 1 segundo para mudar de jogador." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
+        system("clear");
+
 
         // Jogador 2
         cout << "\n" << CYAN << "PLAYER 2, é a tua vez!" << RESET << endl;
@@ -259,7 +262,9 @@ int main(){
         cout << CYAN << "\nPressiona ENTER para passar ao jogador 1..." << RESET << endl;
         cin.ignore(); cin.get();
         system("clear");
+        cout << RED "Esperando 1 segundo para mudar de jogador." << endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
+        system("clear");
     } 
 
     return 0;
