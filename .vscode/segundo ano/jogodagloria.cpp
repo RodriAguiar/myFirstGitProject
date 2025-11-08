@@ -133,15 +133,29 @@ void CasasEspeciais(Casas m[5][6], bool jogador1, int &pos, bool &pularVez, bool
 
 void tabuleiro(Casas m[5][6]) {
     int contador = 1;
+
     for (int i = 0; i < 5; i++) {
+        //Linha Superior
         for (int j = 0; j < 6; j++) cout << GREEN "+-------";
         cout << "+\n" RESET;
+
         for (int j = 0; j < 6; j++) {
             cout << GREEN "| " RESET;
+            string emoji = "";
+
+            if (contador == 5) emoji = "🚫";
+            else if (contador == 10) emoji = "⬅ ";
+            else if (contador == 15) emoji = "➡ ";
+            else if (contador == 20) emoji = "🎲";
+            else if (contador == 25) emoji = "⏳";
+            else{
+                emoji = "  ";
+            }
+
             if (contador < 10)
-                cout << YELLOW << contador << "     " << RESET;
+                cout << YELLOW << contador << "   " << emoji << RESET;
             else
-                cout << YELLOW << contador << "    " << RESET;
+                cout << YELLOW << contador << "  " << emoji << RESET;
             contador++;
         }
         cout << GREEN "|\n" RESET;
