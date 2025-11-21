@@ -19,21 +19,29 @@ using namespace std;
 
 };*/
 
+struct Stats{
+    
+    int basedmg;
+    int basehp;
+    string category;
 
+};
 
 class cards{
     private:
-        int rarity;
+        int    rarity;
         string name;
         string element;
 //      Weapon weapon;
         string goodvs;
-
+        Stats  stats;
     public:    
     
     void character(int rarity,string name, string elment, string goodvs){
-
-        
+        rarity = rarity;
+        name = name;
+        element = element;
+        goodvs = goodvs;
     }
 
 };
