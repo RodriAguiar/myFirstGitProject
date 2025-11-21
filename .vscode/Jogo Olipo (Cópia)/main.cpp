@@ -11,6 +11,40 @@ using namespace std;
 #define YELLOW "\033[33m"
 #define BGGRAY "\033[100m"
 
+/*struct Weapon{
+    
+    string name;
+    bool atk = 0; 
+
+
+};*/
+
+
+
+class cards{
+    private:
+        int rarity;
+        string name;
+        string element;
+//      Weapon weapon;
+        string goodvs;
+
+    public:    
+    
+    void character(int rarity,string name, string elment, string goodvs){
+
+        
+    }
+
+};
+
+void character(){
+
+
+
+};
+
+
 void menu(){
 
 cout << "\n\n" << endl;    
@@ -39,6 +73,7 @@ cout << RESET << endl;
 cout << "\n\n" << endl;
 
 }
+
 
 
 int main(){
