@@ -44,7 +44,6 @@ string estado(Nums x, bool oculto = false) {
     return string(BLUE)+" ~ "+RESET;
 }
 
-<<<<<<< HEAD
 // Linha do tabuleiro
 string linhaEstado(Nums matrix[10][10], int y, bool oculto=false) {
     string linha = "";
@@ -57,12 +56,6 @@ void direcao(bool &vertical,Boat &barcos){
     if(vertical==0){
         for(int i=0;i<barcos.tamanho;i++){
             cout<<"[*]";
-
-    {
-        if (x.boat == 1 && x.shot == 1)
-        {
-            return "\033[31m[X]\033[37m";
->>>>>>> 42a18cb (ggges)
         }
     }else if(vertical==1){
         for(int i=0;i<barcos.tamanho;i++){

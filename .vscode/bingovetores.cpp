@@ -13,16 +13,11 @@ vector<int> nums;
 
 class cartoes{
     private:
-        bool jasaiu;
-        int num;
-        vector<vector<int>> table;
+
+        struct 
 
     public:
-        //constructor
-        cartoes(bool out, int num){
-            jasaiu = out;
-            num = num;
-        } 
+
 };
 
 int main(){
