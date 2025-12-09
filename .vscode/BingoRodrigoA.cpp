@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <random>
 #include <fstream>
+#include <string>
 #include <chrono>
 #include <thread>
 
@@ -55,12 +56,15 @@ public:
             {1, 20}, {21, 40}, {41, 60}, {61, 80}, {81, 100}
         };
 
+        random_device rd;
+        mt19937 g(rd());
+
         for (int col = 0; col < 5; col++) {
             vector<int> numbers;
             for (int n = ranges[col].first; n <= ranges[col].second; n++)
                 numbers.push_back(n);
 
-            shuffle(numbers.begin(), numbers.end(),default_random_engine(time(0)));
+            shuffle(numbers.begin(), numbers.end(), g);
 
             for (int row = 0; row < 5; row++)
                 grid[row][col] = numbers[row];
@@ -105,9 +109,9 @@ public:
         for (int i = 1; i <= 100; i++)
             bolas.push_back(i);
 
-        
-        shuffle(bolas.begin(), bolas.end(),
-        default_random_engine(time(0)));
+        random_device rd;
+        mt19937 g(rd());
+        shuffle(bolas.begin(), bolas.end(), g);
 
         index = 0;
         ultima = -1;
