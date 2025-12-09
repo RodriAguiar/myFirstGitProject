@@ -109,9 +109,9 @@ public:
         for (int i = 1; i <= 100; i++)
             bolas.push_back(i);
 
-        random_device rd;
-        mt19937 g(rd());
-        shuffle(bolas.begin(), bolas.end(), g);
+        
+        shuffle(bolas.begin(), bolas.end(),
+        default_random_engine(time(0)));
 
         index = 0;
         ultima = -1;
