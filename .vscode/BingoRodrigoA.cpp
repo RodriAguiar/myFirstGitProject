@@ -55,14 +55,12 @@ public:
             {1, 20}, {21, 40}, {41, 60}, {61, 80}, {81, 100}
         };
 
-                default_random_engine(time(0));
-
         for (int col = 0; col < 5; col++) {
             vector<int> numbers;
             for (int n = ranges[col].first; n <= ranges[col].second; n++)
                 numbers.push_back(n);
 
-            shuffle(numbers.begin(), numbers.end(), g);
+            shuffle(numbers.begin(), numbers.end(),default_random_engine(time(0)));
 
             for (int row = 0; row < 5; row++)
                 grid[row][col] = numbers[row];
