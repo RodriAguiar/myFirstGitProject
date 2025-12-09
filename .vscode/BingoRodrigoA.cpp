@@ -55,8 +55,7 @@ public:
             {1, 20}, {21, 40}, {41, 60}, {61, 80}, {81, 100}
         };
 
-        random_device rd;
-        mt19937 g(rd());
+                default_random_engine(time(0));
 
         for (int col = 0; col < 5; col++) {
             vector<int> numbers;
