@@ -2,8 +2,6 @@
 
 using namespace std;
 
-
-
 class Produto {
 protected:
     string nome;
@@ -17,7 +15,7 @@ public:
     void setPreco(double valor) {
         if (valor < 0) {
             this->preco = 0;
-            cout << "Aviso: Preço negativo para '" << nome << "' definido como 0." << endl;
+            cout << "Aviso: Preço negativo para '" << nome << "' preço colocado como 0." << endl;
         } else {
             this->preco = valor;
         }
@@ -57,14 +55,14 @@ public:
 int main() {
 
     Livro livro1("O Pé Grandinho ", 25.50, "Joaquim das Couves");
-    Smartphone celular1("iPhone 15", -1000, "Apple"); // Teste de preço negativo
+    Smartphone smartphone1("iPhone 15", -1000, "Apple"); // Teste de preço negativo
 
     livro1.setPreco(-50);
 
     cout << "\n--- Lista Produtos ---\n";
   
     livro1.exibirDetalhes();
-    celular1.exibirDetalhes();
+    smartphone1.exibirDetalhes();
 
     return 0;
 }
